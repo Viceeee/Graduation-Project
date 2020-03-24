@@ -75,8 +75,9 @@ void useropen_init(useropen *openfile, int dirno, int diroff, const char* dir) {
 }
 
 // 得到一个空闲的fat块
-void fatFree(int id) {
-  if (id == END) return;
+void fatFree(int id)
+ {
+  if (id == END) return;//id 是啥？
   if (fat1[id].id != END) fatFree(fat1[id].id);
   fat1[id].id = FREE;
 }
@@ -84,22 +85,26 @@ void fatFree(int id) {
 
 
 
-int getFreeFatid() {
+int getFreeFatid()
+{
   for (int i = 5; i < BLOCKNUM; ++i) if (fat1[i].id == FREE) return i;
   return END;
 }
 
-int getFreeOpenlist() {
+int getFreeOpenlist() 
+{
   for (int i = 0; i < MAXOPENFILE; ++i) if (!openfilelist[i].topenfile) return i;
   return -1;
 }
 
-int getNextFat(int id) {
+int getNextFat(int id)
+{
   if (fat1[id].id == END) fat1[id].id = getFreeFatid();
   return fat1[id].id;
 }
 
-int check_fd(int fd) {
+int check_fd(int fd) 
+{
   if (!(0 <= fd && fd < MAXOPENFILE)) {
     SAYERROR;
     printf("check_fd: %d is invaild index\n", fd);
@@ -108,19 +113,23 @@ int check_fd(int fd) {
   return 1;
 }
 
-int spiltDir(char dirs[DIRLEN][DIRLEN], char *filename) {
+int spiltDir(char dirs[DIRLEN][DIRLEN], char *filename) 
+{
   int bg = 0; int ed = strlen(filename);
   if (filename[0] == '/') ++bg;
   if (filename[ed - 1] == '/') --ed;
 
   int ret = 0, tlen = 0;
-  for (int i = bg; i < ed; ++i) {
-    if (filename[i] == '/') {
+  for (int i = bg; i < ed; ++i) 
+  {
+    if (filename[i] == '/') 
+    {
       dirs[ret][tlen] = '\0';
       tlen = 0;
       ++ret;
     }
-    else {
+    else 
+    {
       dirs[ret][tlen++] = filename[i];
     }
   }
@@ -129,52 +138,65 @@ int spiltDir(char dirs[DIRLEN][DIRLEN], char *filename) {
   return ret+1;
 }
 
-void popLastDir(char *dir) {
+void popLastDir(char *dir) 
+{
   int len = strlen(dir) - 1;
   while (dir[len - 1] != '/') --len;
   dir[len] = '\0';
 }
 
-void splitLastDir(char *dir, char new_dir[2][DIRLEN]) {
+void splitLastDir(char *dir, char new_dir[2][DIRLEN])
+{
   int len = strlen(dir);
   int flag = -1;
-  for (int i = 0; i < len; ++i) if (dir[i] == '/') flag = i;
-
-  if (flag == -1) {
+  for (int i = 0; i < len; ++i) 
+  {
+    if (dir[i] == '/') flag = i;
+  }
+  if (flag == -1) 
+  {
     SAYERROR;
     printf("splitLastDir: can\'t split %s\n", dir);
     return;
   }
 
   int tlen = 0;
-  for (int i = 0; i < flag; ++i) {
+  for (int i = 0; i < flag; ++i) 
+  {
     new_dir[0][tlen++] = dir[i];
   }
   new_dir[0][tlen] = '\0';
   tlen = 0;
-  for (int i = flag + 1; i < len; ++i) {
+  for (int i = flag + 1; i < len; ++i) 
+  {
     new_dir[1][tlen++] = dir[i];
   }
   new_dir[1][tlen] = '\0';
 }
 
-void getPos(int *id, int *offset, unsigned short first, int length) {
+void getPos(int *id, int *offset, unsigned short first, int length) 
+{
   int blockorder = length >> 10;
   *offset = length % 1024;
   *id = first;
-  while (blockorder) {
+  while (blockorder) 
+  {
     --blockorder;
     *id = fat1[*id].id;
   }
 }
 
-int rewrite_dir(char *dir) {
+int rewrite_dir(char *dir) 
+{
   int len = strlen(dir);
   if (dir[len-1] == '/') --len;
   int pre = -1;
-  for (int i = 0; i < len; ++i) if (dir[len] == '/') {
-    if (pre != -1) {
-      if (pre + 1 == i) {
+  for (int i = 0; i < len; ++i) if (dir[len] == '/') 
+  {
+    if (pre != -1) 
+    {
+      if (pre + 1 == i) 
+      {
         printf("rewrite_dir: %s is invaild, please check!\n", dir);
         return 0;
       }
@@ -182,10 +204,12 @@ int rewrite_dir(char *dir) {
     pre = i;
   }
   char newdir[len];
-  if (dir[0] == '/') {
+  if (dir[0] == '/') 
+  {
     strcpy(newdir, "~");
   }
-  else {
+  else 
+  {
     strcpy(newdir, openfilelist[curdirid].dir);
   }
   strcat(newdir, dir);
