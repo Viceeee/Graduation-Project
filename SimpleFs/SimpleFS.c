@@ -173,7 +173,8 @@ fat fat1[BLOCKNUM], fat2[BLOCKNUM];
 
 char str[SIZE];
 
-int main() {
+int main() 
+{
   int fd;
   char command[DIRLEN << 1];
 
