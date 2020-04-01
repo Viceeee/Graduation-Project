@@ -1,3 +1,9 @@
+
+
+
+
+
+
 // basics
 // 根据盘块号和偏移量，直接从FAT上读取指定长度的信息
 int fat_read(unsigned short id, unsigned char *text, int offset, int len);

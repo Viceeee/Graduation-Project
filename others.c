@@ -1,3 +1,9 @@
+
+
+
+
+
+
 // others
 // 启动系统，做好相关的初始化
 void startsys();
