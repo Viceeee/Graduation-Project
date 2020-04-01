@@ -93,20 +93,6 @@ int main()
     void my_cd(char *dirname);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   startsys();
   printf("%s %s: ", USERNAME, openfilelist[curdirid].dir);
 
