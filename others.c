@@ -80,7 +80,7 @@ char str[SIZE];
 void startsys()
 {
   // 各种变量初始化
-  myvhard = (unsigned char *)malloc(SIZE); //返回给myvhard一个地址值
+  myvhard = (unsigned char *)malloc(SIZE); //返回给char类型的指针myvhard一个地址值
                                            //2020-4-2至此
   for (int i = 0; i < BLOCKNUM; ++i)
     blockaddr[i] = i * BLOCKSIZE + myvhard;
