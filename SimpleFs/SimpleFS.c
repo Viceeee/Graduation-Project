@@ -942,7 +942,7 @@ void my_mkdir(char *dirname) {
 // others
 void startsys() {
   // 各种变量初始化
-  myvhard = (unsigned char*)malloc(SIZE);
+  myvhard = (unsigned char*)malloc(SIZE);//定义虚拟硬盘的 malloc()分配请求的内存，并返回一个指针
   for (int i = 0; i < BLOCKNUM; ++i) blockaddr[i] = i * BLOCKSIZE + myvhard;
   for (int i = 0; i < MAXOPENFILE; ++i) openfilelist[i].topenfile = 0;
 

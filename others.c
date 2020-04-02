@@ -66,7 +66,7 @@ typedef struct BLOCK0
   unsigned char *startblock;
 } block0;
 
-unsigned char *myvhard;
+unsigned char *myvhard; //我的虚拟硬
 useropen openfilelist[MAXOPENFILE];
 int curdirid; // 指向用户打开文件表中的当前目录所在打开文件表项的位置
 
@@ -80,7 +80,8 @@ char str[SIZE];
 void startsys()
 {
   // 各种变量初始化
-  myvhard = (unsigned char *)malloc(SIZE);
+  myvhard = (unsigned char *)malloc(SIZE); //返回给myvhard一个地址值
+                                           //2020-4-2至此
   for (int i = 0; i < BLOCKNUM; ++i)
     blockaddr[i] = i * BLOCKSIZE + myvhard;
   for (int i = 0; i < MAXOPENFILE; ++i)

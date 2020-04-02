@@ -86,7 +86,7 @@ int main()
 
     char command[DIRLEN << 1];//为什么要把DIRLEN左移一位？
 
-    startsys();
+    startsys();//2020.4.2至此
     printf("%s %s: ", USERNAME, openfilelist[curdirid].dir);
 
     while (~scanf("%s", command) && strcmp(command, "exit"))
