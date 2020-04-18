@@ -119,7 +119,6 @@ void getPos(int *id, int *offset, unsigned short first, int length);
 int rewrite_dir(char *dir);
 
 // 根据所给的参数对fcb进行初始化
-
 void fcb_init(fcb *new_fcb, const char *filename, unsigned short first, unsigned char attribute)
 {
   strcpy(new_fcb->filename, filename); //这个strcpy(new_fcb->filename, filename)里面的内容是将filename的字符串复制给new_fcb,->意思是把filename的值给new_fcb，

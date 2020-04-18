@@ -366,7 +366,8 @@ void getPos(int *id, int *offset, unsigned short first, int length) {
   }
 }
 
-int rewrite_dir(char *dir) {
+int rewrite_dir(char *dir)
+ {
   int len = strlen(dir);
   if (dir[len-1] == '/') --len;
   int pre = -1;

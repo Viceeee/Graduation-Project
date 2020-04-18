@@ -80,15 +80,18 @@ char str[SIZE];
 void startsys()
 {
   // 各种变量初始化
-  myvhard = (unsigned char *)malloc(SIZE); //返回给char类型的指针myvhard一个地址值
+  myvhard = (unsigned char *)malloc(SIZE); //malloc函数是计算size即硬盘的内存的地址值并且返回给char类型的指针myvhard一个地址值，
                                            //2020-4-2至此
   for (int i = 0; i < BLOCKNUM; ++i)
-    blockaddr[i] = i * BLOCKSIZE + myvhard;
+
+    blockaddr[i] = i * BLOCKSIZE + myvhard;//给blockaddr赋值，blocksize加上size硬盘的内存地址，不断重复，直至初始化结束
+
   for (int i = 0; i < MAXOPENFILE; ++i)
-    openfilelist[i].topenfile = 0;
+
+    openfilelist[i].topenfile = 0;//首先初始化这个openfilelist数组令其=0
 
   // 准备读入 myfsys 文件信息
-  FILE *fp = fopen("myfsys", "rb");
+  FILE *fp = fopen("myfsys", "rb");//
   char need_format = 0;
 
   // 判断是否需要格式化

@@ -19,7 +19,11 @@ int getFcb(fcb *fcbp, int *dirno, int *diroff, int fd, const char *dir);
 int getOpenlist(int fd, const char *org_dir);
 // 打开文件
 int my_open(char *filename);
+
+
 // basics
+
+
 int fat_read(unsigned short id, unsigned char *text, int offset, int len)
 {
     int ret = 0;
